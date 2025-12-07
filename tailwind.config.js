@@ -1,3 +1,5 @@
+import plugin from "tailwindcss/plugin";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: "class",
@@ -8,8 +10,13 @@ export default {
         brand: {
           50: "#f0f9ff",
           100: "#e0f2fe",
+          200: "#bde0fe",
+          300: "#99d9fe",
+          400: "#74c9fe",
           500: "#0ea5e9",
           600: "#0284c7",
+          700: "#0163a4",
+          800: "#014a84",
           900: "#0c4a6e",
         },
       },
@@ -29,5 +36,12 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        ".delay-2s": { animationDelay: "2s" },
+        ".delay-3s": { animationDelay: "3s" },
+      });
+    }),
+  ],
 };
