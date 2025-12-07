@@ -17,9 +17,12 @@ export const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDark }) => {
   ];
   console.log(isDarkMode, toggleDark, navLinks);
   return (
+    // 粘稠的标题带有背景模糊（Glassmorphism）
+    // Z-50确保它能在其他内容之上
     <nav className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-4 lg:px-8">
         <div className="flex justify-between items-center h-16">
+          {/* logo */}
           <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer group">
             <div className="p-2 bg-brand-500 rounded-lg group-hover:rotate-12 transition-transform duration-300">
               <Wind className="h-6 w-6 text-white"></Wind>
@@ -29,24 +32,27 @@ export const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDark }) => {
             </span>
           </div>
           {/* 默认隐藏，大于md显示 */}
-          <div className="hidden md:flex space-x-8 items-center">
-            {navLinks.map((link) => {
-              return (
-                <a
-                  href={link.href}
-                  key={link.name}
-                  className="text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-brand-500 font-medium transition-colors duration-200 text-sm uppercase tracking-wide"
-                >
-                  {link.name}
-                </a>
-              );
-            })}
-            {/* 深浅主题 */}
+          {/* 桌面导航 - 在移动端隐藏（sm：hidden），在平板+（md：flex）上可见 */}
+          <div className="hidden lg:flex items-center space-x-8">
+            <div className="flex space-x-2 sm:space-x-4 md:space-x-8 lg:space-x-8 xl:space-x-10">
+              {navLinks.map((link) => {
+                return (
+                  <a
+                    href={link.href}
+                    key={link.name}
+                    className="text-slate-600 hover:text-brand-600 dark:text-slate-300 dark:hover:text-brand-500 font-medium transition-colors duration-200 text-sm uppercase tracking-wide"
+                  >
+                    {link.name}
+                  </a>
+                );
+              })}
+            </div>
+            {/* 深浅主题变化按钮 */}
             <button
               onClick={toggleDark}
               className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-sky-800 transitions-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
             >
-              {/* sr-only makes text invisible visually but available to screen readers */}
+              {/* sr-only 使文本在视觉上隐形，但屏幕阅读器可访问 */}
               <span className="sr-only">Toggle Dark Mode</span>
               {isDarkMode ? (
                 <Sun className="h-5 w-5 text-yellow-500" />
@@ -59,7 +65,8 @@ export const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDark }) => {
             </button>
           </div>
           {/* 移动端样式，默认显示，大于md隐藏 */}
-          <div className="md:hidden flex items-center gap-4">
+          {/* 移动端菜单按钮——仅在移动端可见 */}
+          <div className="lg:hidden flex items-center gap-4">
             <button
               onClick={toggleDark}
               className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
@@ -86,9 +93,9 @@ export const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDark }) => {
           </div>
         </div>
       </div>
-      {/* menu 下拉 */}
+      {/* 移动菜单下拉菜单 - 带过渡的条件渲染*/}
       <div
-        className={`md:hidden ${
+        className={`lg:hidden ${
           isOpen ? "block" : "hidden"
         } border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950`}
       >
@@ -106,8 +113,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDark }) => {
             );
           })}
           <button className="w-full mt-4 bg-brand-600 text-white px-3 py-2 rounded-md font-medium hover:bg-brand-900">
-            {" "}
-            Get Started{" "}
+            Get Started
           </button>
         </div>
       </div>
