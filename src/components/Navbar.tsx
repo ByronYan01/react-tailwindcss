@@ -1,4 +1,5 @@
-import { Moon, Sun, Wind } from "lucide-react";
+import { Moon, Sun, Wind, X, Menu } from "lucide-react";
+import { useState } from "react";
 
 interface NavbarProps {
   isDarkMode: boolean;
@@ -6,6 +7,7 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDark }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const navLinks = [
     { name: "Features", href: "#features" },
     { name: "Testimonials", href: "#testimonials" },
@@ -26,7 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDark }) => {
               TailwindUI
             </span>
           </div>
-          {/* 默认移动端隐藏 */}
+          {/* 默认隐藏，大于md显示 */}
           <div className="hidden md:flex space-x-8 items-center">
             {navLinks.map((link) => {
               return (
@@ -56,6 +58,57 @@ export const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleDark }) => {
               Get Started
             </button>
           </div>
+          {/* 移动端样式，默认显示，大于md隐藏 */}
+          <div className="md:hidden flex items-center gap-4">
+            <button
+              onClick={toggleDark}
+              className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            >
+              <span className="sr-only">Toggle Dark Mode</span>
+              {isDarkMode ? (
+                <Sun className="h-5 w-5 text-yellow-500" />
+              ) : (
+                <Moon className="h-5 w-5 text-slate-600" />
+              )}
+            </button>
+            {/* 将菜单收入指定下拉 dom 中，由此按钮控制 */}
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 rounded-md text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white focus:outline-none"
+            >
+              <span className="sr-only">Open Menu</span>
+              {isOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+      {/* menu 下拉 */}
+      <div
+        className={`md:hidden ${
+          isOpen ? "block" : "hidden"
+        } border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950`}
+      >
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          {navLinks.map((link) => {
+            return (
+              <a
+                href={link.href}
+                key={link.name}
+                onClick={() => setIsOpen(false)}
+                className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-brand-600 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-800 transition-all"
+              >
+                {link.name}
+              </a>
+            );
+          })}
+          <button className="w-full mt-4 bg-brand-600 text-white px-3 py-2 rounded-md font-medium hover:bg-brand-900">
+            {" "}
+            Get Started{" "}
+          </button>
         </div>
       </div>
     </nav>
