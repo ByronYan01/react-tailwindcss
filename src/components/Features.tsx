@@ -66,12 +66,14 @@ export const Features: React.FC = () => {
           </p>
         </div>
         {/* 响应式网格：1 col 手机，2 col 平板，3 col 桌面 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* 优化：自动调整行高 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-[minmax(0,1fr)">
           {features.map((feature) => (
             <div
               key={feature.name}
               // “group组”类允许子元素根据父游标状态进行样式化
-              className="group relative p-8 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-brand-500 dark:hover:border-brand-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+              // 采用 flex 布局，最后一个子项目使用 mt-auto 充满剩余空间
+              className="flex flex-col group relative p-8 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-brand-500 dark:hover:border-brand-500 transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             >
               {/* <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 rounded-full bg-gradient-to-br from-transparent to-slate-200/50 dark:to-slate-700/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-2xl"></div> */}
               {/* 图标 */}
@@ -84,10 +86,10 @@ export const Features: React.FC = () => {
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
                 {feature.name}
               </h3>
-              <p className=" text-slate-500 dark:text-slate-400 leading-relaxed">
+              <p className=" text-slate-500 dark:text-slate-400 leading-relaxed mb-3">
                 {feature.description}
               </p>
-              <div className="mt-6 flex items-center text-brand-600 dark:text-brand-400 font-medium group-hover:translate-x-2 cursor-pointer">
+              <div className="mt-auto flex items-center text-brand-600 dark:text-brand-400 font-medium group-hover:translate-x-2 cursor-pointer">
                 {/* <div className="mt-6 flex items-center text-brand-600 dark:text-brand-400 font-medium group-hover:translate-x-2 transition-transform cursor-pointer"> */}
                 Learn more <ArrowRight className="ml-2 h-4 w-4" />
               </div>
