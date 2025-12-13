@@ -4,6 +4,9 @@ import { Hero } from "./components/Hero";
 import { Features } from "./components/Features";
 import { Testimonials } from "./components/Testimonials";
 import { Gallery } from "./components/Gallery";
+import { TableSection } from "./components/TableSection";
+import { Pricing } from "./components/Pricing";
+import { Contact } from "./components/Contact";
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -17,6 +20,9 @@ export default function App() {
           <Features />
           <Testimonials />
           <Gallery />
+          <TableSection />
+          <Pricing />
+          <Contact />
         </main>
       </div>
     </div>

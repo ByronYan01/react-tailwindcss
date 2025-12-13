@@ -38,7 +38,11 @@ export const Contact: React.FC = () => {
               <div className="w-16 h-16 bg-brand-400 rounded-full opacity-50 absolute bottom-10 right-10"></div>
             </div>
           </div>
-          {/* form side */}
+          {/* 
+            form side 
+            注意：
+               很多 bg、border、text 样式无法覆盖原生 input 
+          */}
           <div className="lg:w-7/12 p-10">
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -73,21 +77,81 @@ export const Contact: React.FC = () => {
                     placeholder="Doe"
                   />
                 </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
-                  >
-                    Email
-                  </label>
-                  {/* valid: & invalid: modifiers for form validation states */}
+              </div>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
+                >
+                  Email
+                </label>
+                {/* valid: & invalid: modifiers for form validation states */}
+                <input
+                  type="email"
+                  id="email"
+                  className="w-full rounded-md border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm focus:border-brand-500 focus:ring-brand-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 py-2 px-3 sm:text-sm"
+                  placeholder="john@example.com"
+                />
+              </div>
+              {/* input 文件框样式修改：修改器 */}
+              <div>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  Attachment
+                </label>
+                <input
+                  type="file"
+                  className="block w-full text-sm text-slate-500 dark:text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100 dark:file:bg-slate-700 dark:file:text-brand-400 dark:hover:file:bg-slate-600"
+                />
+              </div>
+              {/* 文本框 */}
+              <div>
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  rows={4}
+                  className="w-full rounded-md border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm focus:border-brand-500 focus:ring-brand-500 caret-brand-500 py-2 px-3 sm:text-sm resize-none"
+                  placeholder="Tell us about your project..."
+                ></textarea>
+              </div>
+              {/* 同伴修饰符 Peer Modifier 示例：复选框控制兄弟姐妹风格 */}
+              <div className="group flex flex-col gap-1 justify-end">
+                <div className="flex items-center gap-2">
+                  {/* 
+                    peer: 标记此元素为同伴，供兄弟姐妹引用
+                    accent: 颜色原生复选框 */}
                   <input
-                    type="email"
-                    id="email"
-                    className="w-full rounded-md border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm focus:border-brand-500 focus:ring-brand-500 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500 py-2 px-3 sm:text-sm"
-                    placeholder="john@example.com"
+                    id="terms"
+                    type="checkbox"
+                    className="peer h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500 accent-brand-600"
                   />
+                  <label
+                    htmlFor="terms"
+                    className=" ml-2 block text-sm text-slate-700 dark:text-slate-300 peer-checked:text-brand-600 peer-checked:font-bold transition-colors"
+                  >
+                    I agree to the
+                    <a href="#" className="underline">
+                      Terms and Conditions
+                    </a>
+                  </label>
                 </div>
+                {/* 通过 peer-checked 检查勾选时出现的隐形免责声明 */}
+                {/* <p className="mt-1 text-xs text-brand-600 invisible group-has-[:checked]:visible"> */}
+                <p className="mt-1 text-xs text-brand-600 hidden group-has-[:checked]:block">
+                  Thank you for agreeing!
+                </p>
+              </div>
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  className=" py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-slate-800 transition-colors"
+                >
+                  Send Message
+                </button>
               </div>
             </form>
           </div>
