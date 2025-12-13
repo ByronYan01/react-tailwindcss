@@ -7,6 +7,7 @@ import { Gallery } from "./components/Gallery";
 import { TableSection } from "./components/TableSection";
 import { Pricing } from "./components/Pricing";
 import { Contact } from "./components/Contact";
+import { Footer } from "./components/Footer";
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -23,6 +24,7 @@ export default function App() {
           <TableSection />
           <Pricing />
           <Contact />
+          <Footer />
         </main>
       </div>
     </div>
