@@ -2,7 +2,7 @@ import React from "react";
 import { Github, Twitter, Linkedin, Wind } from "lucide-react";
 
 export const Footer: React.FC = () => {
-  const linkObj = {
+  const linkObj: Record<string, string[]> = {
     Product: ["Features", "Integrations", "Documentation", "Pricing"],
     Company: ["About", "Blog", "Jobs", "Partners"],
     Legal: ["Privacy", "Terms", "Cookie Policy"],

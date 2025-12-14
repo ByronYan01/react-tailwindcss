@@ -101,7 +101,7 @@ export const Features: React.FC = () => {
   );
 };
 // 箭头图标的辅助组件
-function ArrowRight(props: React.SVGProps<SVGElement>) {
+function ArrowRight(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
       <path
